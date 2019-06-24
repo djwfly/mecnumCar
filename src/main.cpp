@@ -50,7 +50,7 @@ void setup()
   OSC_init();
   delay(1000);
   espSerial.flush();
-  espSerial.print("+++"); // To ensure we exit the transparent transmision mode
+ /*  espSerial.print("+++"); // To ensure we exit the transparent transmision mode
   delay(100);
 
   ESPsendCommand("AT", "OK", 1);
@@ -76,7 +76,7 @@ void setup()
   ESPsendCommand("AT+CIPMODE=1", "OK", 3); // Transparent mode
   ESPsendCommand("AT+CIPSTART=\"UDP\",\"192.168.4.2\",8000,9000,0", "OK", 3);
   delay(250);
-  ESPsendCommand("AT+CIPSEND", ">", 2); // Start transmission (transparent mode)
+  ESPsendCommand("AT+CIPSEND", ">", 2); // Start transmission (transparent mode) */
   delay(1000);
 }
 

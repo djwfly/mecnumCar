@@ -179,6 +179,7 @@ void OSC_MsgRead()
       } // Touch message(/z)
       OSCreadCounter--;   // Reading counter until we reach the Parameter position
       if (OSCreadCounter <= 0) {
+        espSerial.flush();
         OSCreadStatus = 0;
         OSCnewMessage = 1;
         //Serial.println(value);
