@@ -13,15 +13,15 @@ AF_DCMotor motorBR(2);
 
 Servo myservo;//定义舵机变量名
 
-const int TrigPin = 8;//设定超声波SR04连接的Arduino引脚
-const int EchoPin = 9;
+/* const int TrigPin = 8;//设定超声波SR04连接的Arduino引脚
+const int EchoPin = 9; */
 
-const int KeepAway = 30;//离障碍最近距离
+/* const int KeepAway = 30;//离障碍最近距离
 const int speedDownPosition = 60;
 const int LookDelay = 300;//转动舵机的停顿时间
 const int TurnDelay = 500;//转向停顿时间，通过停顿时间控制转弯角度大小
 const int BackDelay = 600;//倒退时间
-const int ReboundDelay = 200;//反弹时间
+const int ReboundDelay = 200;//反弹时间 */
 
 int differSpeed = 0;
 int defaultSpeed = 250;
@@ -140,7 +140,7 @@ motorFL.run(FORWARD);motorFL.setSpeed(i);
 motorFR.run(FORWARD);motorFR.setSpeed(i-differSpeed);
 }
 
-void goRebound(int i)
+/* void goRebound(int i)
 {
 motorFL.run(BACKWARD);motorFL.setSpeed(i); 
 motorFR.run(FORWARD);motorFR.setSpeed(i-differSpeed);
@@ -167,8 +167,8 @@ void lookLeft4() {//向左看45度
 void lookLeft5() {//向左看90度
   myservo.write(175);
   delayBreak(LookDelay);
-}
-float checkDistance(int TrigPin, int EchoPin) {//超声波探测障碍物距离函数
+} */
+/* float checkDistance(int TrigPin, int EchoPin) {//超声波探测障碍物距离函数
   float distance;
   digitalWrite(TrigPin, LOW);
   delayMicroseconds(2);
@@ -196,5 +196,6 @@ int lookAround() {//观察周围情况，并返回方向代码
   if (D4 > D2 && D4 > D3 && D4 > D1 && D4 > D5 && D4 > KeepAway)return 4;
   if (D5 > D2 && D5 > D3 && D5 > D4 && D5 > D1 && D5 > KeepAway)return 5;
   return 0;
-}
+}*/
 #endif
+ 
