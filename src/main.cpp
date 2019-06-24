@@ -125,22 +125,22 @@ void loop() //主循环函数
       }
     }
 
-    Serial.println();
-    Serial.print("fader1 : ");
+/*     Serial.println();
+    Serial.print("fader0 : ");
     Serial.print(fader[0]);
-    Serial.print("fader2 : ");
+    Serial.print("fader1 : ");
     Serial.print(fader[1]);
-    Serial.print("fader3 : ");
+    Serial.print("fader2: ");
     Serial.print(fader[2]);
-    Serial.print("push1 : ");
+    Serial.print("push0 : ");
     Serial.print(push[0]);
-    Serial.print("push2 : ");
+    Serial.print("push1 : ");
     Serial.print(push[1]);
     Serial.print("toggle1 : ");
     Serial.print(toggle[0]);
     Serial.print("toggle2 : ");
     Serial.print(toggle[1]);
-    Serial.println();
+    Serial.println(); */
   }
 
   //  int throttlePwmValue = map(int(throttle * 100), 0, 100, 0, maxSpeed);

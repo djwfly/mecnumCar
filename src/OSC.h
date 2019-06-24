@@ -61,6 +61,7 @@ void OSC_init()
   fader[1] = 0.5;
   fader[2] = 0.5;
   fader[3] = 0.5;
+  fader[4] = 0.5;
 }
 
 void OSC_MsgSend(char *c, unsigned char msgSize, float p)
@@ -141,11 +142,11 @@ void OSC_MsgRead()
         OSCreadStatus = 2;  // Message type detected
         OSCreadCounter = 10; // Bytes to read the parameter
         OSCreadNumParams = 1; // 1 parameters
-        OSCcommandType = 20 + (UDPBuffer[0] - '1');
+        OSCcommandType = 20 + (UDPBuffer[0] - '0');
         //Serial.println(commandType);
 #ifdef OSCDEBUG2
         Serial.print("$P");
-          Serial.print(UDPBuffer[0] - '1');
+          Serial.print(UDPBuffer[0] - '0');
           Serial.print(":");
 #endif
           return;
@@ -155,7 +156,7 @@ void OSC_MsgRead()
         OSCreadStatus = 2;  // Message type detected
         OSCreadCounter = 10; // Bytes to read the parameter
         OSCreadNumParams = 1; // 1 parameters
-        OSCcommandType = 30 + (UDPBuffer[0] - '1');
+        OSCcommandType = 30 + (UDPBuffer[0] - '0');
         //Serial.println(commandType);
 #ifdef OSCDEBUG2
           Serial.print("$T");
@@ -182,42 +183,42 @@ void OSC_MsgRead()
         OSCnewMessage = 1;
         //Serial.println(value);
         switch (OSCcommandType) {
-          case 1:
+          case 0:
             value = OSC_extractParamFloat(0);
             //Serial.print("fader1 : ");Serial.println(value);
             fader[0] = value;
-            if ((OSCtouchMessage) && (value == 0)) {
+/*             if ((OSCtouchMessage) && (value == 0)) {
               fader[0] = 0.5;
               //Serial.println("TOUCH_X");
-              OSC_MsgSend("/1/fader1\0\0\0,f\0\0\0\0\0\0", 20, 0.5);
-            }
+              OSC_MsgSend("/1/fader0\0\0\0,f\0\0\0\0\0\0", 20, 0.5); 
+            }*/
 #ifdef OSCDEBUG
             Serial.print("$F1:");
             Serial.println(fader[0]);
 #endif
             break;
-          case 2:
+          case 1:
             value = OSC_extractParamFloat(0);
             //Serial.println("fader2 : ");Serial.print(value);
             fader[1] = value;
-            if ((OSCtouchMessage) && (value == 0)) {
+            /* if ((OSCtouchMessage) && (value == 0)) {
               fader[1] = 0.5;
               //Serial.println("TOUCH_Y");
-              OSC_MsgSend("/1/fader2\0\0\0,f\0\0\0\0\0\0", 20, 0.5);
-            }
+              OSC_MsgSend("/2/fader1\0\0\0,f\0\0\0\0\0\0", 20, 0.5); 
+            }*/
 #ifdef OSCDEBUG
             Serial.print("$F2:");
             Serial.println(fader[1]);
 #endif
             break;
-          case 3:
+          case 2:
             fader[2] = OSC_extractParamFloat(0);
 #ifdef OSCDEBUG
             Serial.print("$F3:");
             Serial.println(fader[2]);
 #endif
             break;
-          case 4:
+          case 3:
             fader[3] = OSC_extractParamFloat(0);
 #ifdef OSCDEBUG
             Serial.print("$F4:");
@@ -225,10 +226,18 @@ void OSC_MsgRead()
 #endif
             break;
            
+          case 4:
+            fader[4] = OSC_extractParamFloat(0);
+#ifdef OSCDEBUG
+            Serial.print("$F4:");
+            Serial.println(fader[4]);
+#endif
+            break;
+
             default:
             // Push y toggle
             value = OSC_extractParamFloat(0);
-            if ((OSCcommandType >= 20) && (OSCcommandType < 25))
+            if ((OSCcommandType >= 20) && (OSCcommandType < 29))
             {
               if (value == 0)
                 push[OSCcommandType - 20] = 0;
