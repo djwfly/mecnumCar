@@ -6,19 +6,12 @@
 #include "OSC.h"
 #include "motorAction.h"
 
-//#include <EEPROM.h>
 
-// start reading from the first byte (address 0) of the EEPROM
-//int address = 0;
+//#define USINGESPAT
 
-#define automouseMode 1
-#define manualMode 0
-
-//int differSpeed = 0;
-//int defaultSpeed = 180;
 int maxSpeed = 255;
 int maxSteerSpeed = 100;
-int runMode = automouseMode;
+//int runMode = automouseMode;
 
 bool newControlParameters = false;
 bool modifing_control_parameters = false;
@@ -50,7 +43,8 @@ void setup()
   OSC_init();
   delay(1000);
   espSerial.flush();
- /*  espSerial.print("+++"); // To ensure we exit the transparent transmision mode
+  # ifdef USINGESPAT
+   espSerial.print("+++"); // To ensure we exit the transparent transmision mode
   delay(100);
 
   ESPsendCommand("AT", "OK", 1);
@@ -76,7 +70,8 @@ void setup()
   ESPsendCommand("AT+CIPMODE=1", "OK", 3); // Transparent mode
   ESPsendCommand("AT+CIPSTART=\"UDP\",\"192.168.4.2\",8000,9000,0", "OK", 3);
   delay(250);
-  ESPsendCommand("AT+CIPSEND", ">", 2); // Start transmission (transparent mode) */
+  ESPsendCommand("AT+CIPSEND", ">", 2); // Start transmission (transparent mode) 
+  #endif
   delay(1000);
 }
 
@@ -93,12 +88,16 @@ void loop() //主循环函数
         if (push[i] == 1)
         {
           moveActionID = i;
-          push[i] == 0;
+         // push[i] == 0;
           break;
         }
+        if(i==8) moveActionID=4; 
       }
-      speedChanged = 1;
+if( throttle!= fader[0])
+{speedChanged = 1;
       throttle = fader[0];
+       }
+      
 
       //OSC_MsgSend("/1/fader1\0\0\0,f\0\0\0\0\0\0", 20, fader[0]);
       //OSC_MsgSend("/1/fader2\0\0\0,f\0\0\0\0\0\0", 20, fader[1]);
