@@ -6,7 +6,6 @@
 #include "OSC.h"
 #include "motorAction.h"
 
-
 //#define USINGESPAT
 
 int maxSpeed = 255;
@@ -43,8 +42,8 @@ void setup()
   OSC_init();
   delay(1000);
   espSerial.flush();
-  # ifdef USINGESPAT
-   espSerial.print("+++"); // To ensure we exit the transparent transmision mode
+#ifdef USINGESPAT
+  espSerial.print("+++"); // To ensure we exit the transparent transmision mode
   delay(100);
 
   ESPsendCommand("AT", "OK", 1);
@@ -70,8 +69,8 @@ void setup()
   ESPsendCommand("AT+CIPMODE=1", "OK", 3); // Transparent mode
   ESPsendCommand("AT+CIPSTART=\"UDP\",\"192.168.4.2\",8000,9000,0", "OK", 3);
   delay(250);
-  ESPsendCommand("AT+CIPSEND", ">", 2); // Start transmission (transparent mode) 
-  #endif
+  ESPsendCommand("AT+CIPSEND", ">", 2); // Start transmission (transparent mode)
+#endif
   delay(1000);
 }
 
@@ -88,16 +87,17 @@ void loop() //主循环函数
         if (push[i] == 1)
         {
           moveActionID = i;
-         // push[i] == 0;
+          // push[i] == 0;
           break;
         }
-        if(i==8) moveActionID=4; 
+        if (i == 8)
+          moveActionID = 4;
       }
-if( throttle!= fader[0])
-{speedChanged = 1;
-      throttle = fader[0];
-       }
-      
+      if (throttle != fader[0])
+      {
+        speedChanged = 1;
+        throttle = fader[0];
+      }
 
       //OSC_MsgSend("/1/fader1\0\0\0,f\0\0\0\0\0\0", 20, fader[0]);
       //OSC_MsgSend("/1/fader2\0\0\0,f\0\0\0\0\0\0", 20, fader[1]);
@@ -124,7 +124,7 @@ if( throttle!= fader[0])
       }
     }
 
-/*     Serial.println();
+    /*     Serial.println();
     Serial.print("fader0 : ");
     Serial.print(fader[0]);
     Serial.print("fader1 : ");
@@ -146,43 +146,42 @@ if( throttle!= fader[0])
 
   // OSC_MsgSend("/1/label3\0\0\0,f\0\0\0\0\0\0", 20, _leftPwmVal);delay(15);
   // OSC_MsgSend("/1/label4\0\0\0,f\0\0\0\0\0\0", 20, _rightPwmVal);
-      switch (moveActionID)
-    {
-    case 0:
-      moveFL();
-      break;
-      ;
-    case 1:
-      moveF();
-      break;
-      ;
-    case 2:
-      moveFR();
-      break;
-      ;
-    case 3:
-      moveL();
-      break;
-      ;
-    case 5:
-      moveR();
-      break;
-      ;
-    case 6:
-      moveBL();
-      break;
-      ;
-    case 7:
-      moveB();
-      break;
-      ;
-    case 8:
-      moveBR();
-      break;
-      ;
-    default:
-      moveStop();
-      break;
-    }
-   
+  switch (moveActionID)
+  {
+  case 0:
+    moveFL();
+    break;
+    ;
+  case 1:
+    moveF();
+    break;
+    ;
+  case 2:
+    moveFR();
+    break;
+    ;
+  case 3:
+    moveL();
+    break;
+    ;
+  case 5:
+    moveR();
+    break;
+    ;
+  case 6:
+    moveBL();
+    break;
+    ;
+  case 7:
+    moveB();
+    break;
+    ;
+  case 8:
+    moveBR();
+    break;
+    ;
+  default:
+    moveStop();
+    break;
+  }
 }
