@@ -1,8 +1,8 @@
 #ifndef OSC_H
 #define OSC_H
 #include <SoftwareSerial.h>
-#define espRxPin  11
-#define espTxPin  13
+#define espRxPin  A4
+#define espTxPin  A5
 //#define OSCDEBUG
 //#define OSCDEBUG2
 //#define OSCDEBUG3
