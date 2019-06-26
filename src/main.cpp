@@ -82,16 +82,28 @@ void loop() //主循环函数
     OSCnewMessage = 0;
     if (page == 1)
     {
-      for (int i = 0; i < 9; i++)
+      if (push[4] == 1)
       {
-        if (push[i] == 1)
+        moveActionID = 4;
+        for (int i = 0; i < 9; i++)
         {
-          moveActionID = i;
-          // push[i] == 0;
-          break;
+          push[i] = 0;
         }
-        if (i == 8)
-          moveActionID = 4;
+      }
+      else
+      {
+
+        for (int i = 0; i < 9; i++)
+        {
+          if (push[i] == 1)
+          {
+            moveActionID = i;
+            // push[i] == 0;
+            break;
+          }
+          if (i == 8)
+            moveActionID = 4;
+        }
       }
       if (throttle != fader[0])
       {
@@ -116,11 +128,13 @@ void loop() //主循环函数
 
     if (speedChanged == 1)
     {
+      //Serial.println("pwm: ");
       speedChanged = 0;
       int throttlePwmValue = map(int(throttle * 100), 0, 100, 0, maxSpeed);
       for (int i = 0; i < 4; i++)
       {
         pwm[i] = constrain((int)(throttlePwmValue + (fader[i + 1] - 0.5) * differSpeedDefault), 0, maxSpeed);
+       // Serial.println(pwm[i]);
       }
     }
 
@@ -146,8 +160,10 @@ void loop() //主循环函数
 
   // OSC_MsgSend("/1/label3\0\0\0,f\0\0\0\0\0\0", 20, _leftPwmVal);delay(15);
   // OSC_MsgSend("/1/label4\0\0\0,f\0\0\0\0\0\0", 20, _rightPwmVal);
+
   switch (moveActionID)
   {
+
   case 0:
     moveFL();
     break;
@@ -184,4 +200,5 @@ void loop() //主循环函数
     moveStop();
     break;
   }
+  delay(10);
 }

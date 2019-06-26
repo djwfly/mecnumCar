@@ -99,7 +99,7 @@ void OSC_MsgRead()
       UDPBuffer[i] = UDPBuffer[i - 1];
     }
     UDPBuffer[0] = espSerial.read();delay(15);
-    Serial.print(UDPBuffer[0]);
+    //Serial.print(UDPBuffer[0]);
 #ifdef OSCDEBUG3
     Serial.print(UDPBuffer[0]);
 #endif

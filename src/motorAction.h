@@ -37,69 +37,68 @@ void delayBreak(int delayTime)
     }
  delay(delayTime%5);
  }
-
 void moveF()
 {
-  motorFL.run(FORWARD); motorFL.setSpeed(pwm[0]); 
-  motorFR.run(BACKWARD);motorFR.setSpeed(pwm[1]);
-  motorBL.run(FORWARD);motorFL.setSpeed(pwm[2]); 
-  motorBR.run(BACKWARD);motorFL.setSpeed(pwm[3]); 
-}
+  motorFL.run(FORWARD); motorFL.setSpeed(pwm[3]); delay(10);
+  motorFR.run(BACKWARD);motorFR.setSpeed(pwm[2]);delay(10);
+   motorBL.run(FORWARD);motorFL.setSpeed(pwm[0]); delay(10);
+  motorBR.run(BACKWARD);motorFL.setSpeed(pwm[1]); delay(10);
+ }
 
 void moveL()
 {
-  motorFL.run(FORWARD); motorFL.setSpeed(pwm[0]); 
-  motorFR.run(FORWARD);motorFR.setSpeed(pwm[1]);
-  motorBL.run(BACKWARD);motorFL.setSpeed(pwm[2]); 
-  motorBR.run(BACKWARD);motorFL.setSpeed(pwm[3]); 
+  motorFL.run(FORWARD); motorFL.setSpeed(pwm[3]); 
+  motorFR.run(FORWARD);motorFR.setSpeed(pwm[2]);
+  motorBL.run(BACKWARD);motorFL.setSpeed(pwm[0]); 
+  motorBR.run(BACKWARD);motorFL.setSpeed(pwm[1]); 
 }
 
 void moveR()
 {
-  motorFL.run(BACKWARD); motorFL.setSpeed(pwm[0]); 
-  motorFR.run(BACKWARD);motorFR.setSpeed(pwm[1]);
-  motorBL.run(FORWARD);motorFL.setSpeed(pwm[2]); 
-  motorBR.run(FORWARD);motorFL.setSpeed(pwm[3]); 
+  motorFL.run(BACKWARD); motorFL.setSpeed(pwm[3]); 
+  motorFR.run(BACKWARD);motorFR.setSpeed(pwm[2]);
+  motorBL.run(FORWARD);motorFL.setSpeed(pwm[0]); 
+  motorBR.run(FORWARD);motorFL.setSpeed(pwm[1]); 
 }
 
 
 void moveB()
 {
-  motorFL.run(BACKWARD); motorFL.setSpeed(pwm[0]); 
-  motorFR.run(FORWARD);motorFR.setSpeed(pwm[1]);
-  motorBL.run(BACKWARD);motorFL.setSpeed(pwm[2]); 
-  motorBR.run(FORWARD);motorFL.setSpeed(pwm[3]); 
+  motorFL.run(BACKWARD); motorFL.setSpeed(pwm[3]); 
+  motorFR.run(FORWARD);motorFR.setSpeed(pwm[2]);
+  motorBL.run(BACKWARD);motorFL.setSpeed(pwm[0]); 
+  motorBR.run(FORWARD);motorFL.setSpeed(pwm[1]); 
 }
 void moveFL()
 {
-  motorFL.run(FORWARD); motorFL.setSpeed(pwm[0]); 
+  motorFL.run(FORWARD); motorFL.setSpeed(pwm[3]); 
   motorFR.run(RELEASE);//motorFR.setSpeed(pwm[1]);
   motorBL.run(RELEASE);//motorFL.setSpeed(pwm[2]); 
-  motorBR.run(FORWARD); motorFL.setSpeed(pwm[3]);  
+  motorBR.run(FORWARD); motorFL.setSpeed(pwm[1]);  
 }
 
 void moveFR()
 {
   motorFL.run(RELEASE);// motorFL.setSpeed(pwm[0]); 
-  motorFR.run(FORWARD);motorFR.setSpeed(pwm[1]);
-  motorBL.run(FORWARD);motorFL.setSpeed(pwm[2]); 
+  motorFR.run(FORWARD);motorFR.setSpeed(pwm[2]);
+  motorBL.run(FORWARD);motorFL.setSpeed(pwm[0]); 
   motorBR.run(RELEASE);//motorFL.setSpeed(pwm[3]); 
 }
 
 void moveBL()
 {
   motorFL.run(RELEASE); //motorFL.setSpeed(pwm[0]); 
-  motorFR.run(BACKWARD);motorFR.setSpeed(pwm[1]);
-  motorBL.run(BACKWARD);motorFL.setSpeed(pwm[2]); 
+  motorFR.run(BACKWARD);motorFR.setSpeed(pwm[2]);
+  motorBL.run(BACKWARD);motorFL.setSpeed(pwm[0]); 
   motorBR.run(RELEASE);//motorFL.setSpeed(pwm[3]); 
 }
 
 void moveBR()
 {
-  motorFL.run(FORWARD); motorFL.setSpeed(pwm[0]); 
-  motorFR.run(BACKWARD);motorFR.setSpeed(pwm[1]);
-  motorBL.run(FORWARD);motorFL.setSpeed(pwm[2]); 
-  motorBR.run(BACKWARD);motorFL.setSpeed(pwm[3]); 
+  motorFL.run(FORWARD); motorFL.setSpeed(pwm[3]); 
+  motorFR.run(BACKWARD);motorFR.setSpeed(pwm[2]);
+  motorBL.run(FORWARD);motorFL.setSpeed(pwm[0]); 
+  motorBR.run(BACKWARD);motorFL.setSpeed(pwm[1]); 
 }
 
 void moveStop()
